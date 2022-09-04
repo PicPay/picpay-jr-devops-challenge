@@ -17,14 +17,17 @@ func main() {
     mux.HandleFunc("/health", func(writer http.ResponseWriter, request *http.Request){
         if request.Method == "OPTIONS" {
             writer.WriteHeader(http.StatusOK)
+            fmt.Println("GET /health (down)")
             return
         }
+        fmt.Println("GET /health (up)")
         fmt.Fprintf(writer, "up")
     })
 
     mux.HandleFunc("/data", func(writer http.ResponseWriter, request *http.Request) {
         client := redis.NewClient(&redis.Options{Addr: redis_host+":"+redis_port})
-        key := client.Get(client.Context(),"SHAREDKEY")
+        key := client.Get("SHAREDKEY")
+        fmt.Println("GET /data (" + key.Val() + ")")
         fmt.Fprintf(writer, key.Val())
     })
 
