@@ -10,7 +10,7 @@ const home = () => {
     const writerp = container.appendChild(document.createElement('p'))
     readerhealth(readerp)
     writerhealth(writerp)
-    container.classList.add("mx-auto","align-middle","container")
+    container.classList.add("mx-auto", "align-middle", "container")
 
     return container;
 };
@@ -22,7 +22,7 @@ const reader = () => {
         `
     const child = container.appendChild(document.createElement('p'))
     readData(child)
-    container.classList.add("mx-auto","align-middle","container")
+    container.classList.add("mx-auto", "align-middle", "container")
 
     return container;
 };
@@ -39,49 +39,49 @@ const writer = () => {
           <button type="submit" class="btn btn-default">Enviar</button>
         </form>
     `
-    container.classList.add("mx-auto","align-middle","container")
+    container.classList.add("mx-auto", "align-middle", "container")
     const formsubmit = container.querySelector("#submitdata")
-    formsubmit.addEventListener('submit',writeData)
+    formsubmit.addEventListener('submit', writeData)
     return container;
 }
 
 const readerhealth = (readerparagraph) => {
-    const url='http://localhost:8080/health';
+    const url = 'http://localhost:8080/health';
     fetch(url, {
-        method: "GET",
-        mode: 'cors',
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        },
-    }).then( response => {
-        response.text().then(body => {
-            assembleStatus(readerparagraph, "Reader", body)
-        }).catch(err => {
+            method: "GET",
+            mode: 'cors',
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+        }).then(response => {
+            response.text().then(body => {
+                assembleStatus(readerparagraph, "Reader", body)
+            }).catch(err => {
+                assembleStatus(readerparagraph, "Reader", "down")
+            })
+        })
+        .catch(error => {
+            console.log(error)
             assembleStatus(readerparagraph, "Reader", "down")
         })
-    })
-    .catch( error => {
-        console.log(error)
-        assembleStatus(readerparagraph,"Reader","down")
-    })
 }
 
- const writerhealth = (writerparagraph) => {
-    const url='http://localhost:8081/health';
+const writerhealth = (writerparagraph) => {
+    const url = 'http://localhost:8081/health';
     fetch(url, {
         method: "GET",
         mode: 'cors',
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
-    }).then( response => {
+    }).then(response => {
         response.text().then(body => {
             assembleStatus(writerparagraph, "Writer", body)
         }).catch(err => {
             assembleStatus(writerparagraph, "Writer", "down")
-    })
-    }).catch( error => {
-        assembleStatus(writerparagraph,"Writer","down")
+        })
+    }).catch(error => {
+        assembleStatus(writerparagraph, "Writer", "down")
     })
 }
 
@@ -92,14 +92,14 @@ const assembleStatus = (paragraph, service, status) => {
         statusIcon = 'success'
         statusBadge = 'success'
     }
-    paragraph.innerHTML=
-            service + ' service status <span class="badge badge-'+statusBadge+'">'+status+'</span>'
+    paragraph.innerHTML =
+        service + ' service status <span class="badge badge-' + statusBadge + '">' + status + '</span>'
 }
 
 async function writeData(e) {
     e.preventDefault();
 
-    const url='http://localhost:8081/write';
+    const url = 'http://localhost:8081/write';
     fetch(url, {
         method: "POST",
         body: e.target.elements.post.value,
@@ -107,33 +107,33 @@ async function writeData(e) {
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
-    }).then( response => {
+    }).then(response => {
 
-    }).catch( error => {
+    }).catch(error => {
         console.log(error)
     })
 }
 
 const readData = (paragraph) => {
-    const url='http://localhost:8080/data';
+    const url = 'http://localhost:8080/data';
     fetch(url, {
-        method: "GET",
-        mode: 'cors',
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        },
-    }).then( response => {
-        response.text().then(body => {
-            paragraph.innerHTML = "Valor encontrado = "+body
-        }).catch(err => {
-            paragraph.innerHTML = `
+            method: "GET",
+            mode: 'cors',
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+        }).then(response => {
+            response.text().then(body => {
+                paragraph.innerHTML = "Valor encontrado = " + body
+            }).catch(err => {
+                paragraph.innerHTML = `
             <div class="alert alert-warning" role="alert">
               Ocorreu um erro ao buscar a chave
             </div>
         `
+            })
         })
-    })
-        .catch( error => {
+        .catch(error => {
             console.log(error)
         })
 }
@@ -145,7 +145,7 @@ const routes = {
     writer: writer(),
 }
 
-const validateHash = (hash) => hash === ""  ? 'home' : hash.replace('#', '');
+const validateHash = (hash) => hash === "" ? 'home' : hash.replace('#', '');
 const init = () => window.addEventListener('hashchange', renderPage);
 
 const renderPage = () => {
@@ -154,7 +154,7 @@ const renderPage = () => {
     root.appendChild(routes[page])
 }
 
-window.addEventListener('load', ()=> {
+window.addEventListener('load', () => {
     renderPage();
     init();
 });

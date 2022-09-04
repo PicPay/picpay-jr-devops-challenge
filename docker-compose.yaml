@@ -3,24 +3,46 @@ services:
   web:
     build: services/frontend
     ports:
-      - "5000:5000"
+      - "5001:5000"
+    volumes:
+      - ./services/frontend/:/app
     networks:
       - frontend
-      - backend
+    depends_on:
+      - reader
+      - writer
   reader:
     build: services/reader
     ports:
-      - "8081:8081"
+      - "8080:8080"
+    volumes:
+      - ./services/reader/:/app
     networks:
       - frontend
+      - backend
+    depends_on:
+      - redis
   writer:
     build: services/writer
     ports:
-      - "8080:8080"
+      - "8081:8081"
+    volumes:
+      - ./services/writer/:/app
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - redis
+  redis:
+    image: "redis:alpine"
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - /tmp/redis.tmp:/data
     networks:
       - backend
-  reids:
-    image: "redis:alpine"
 
 networks:
   backend:
+  frontend:
