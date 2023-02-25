@@ -11,3 +11,6 @@ ao observar o Dockerfile  do writer, o comando python abre o REPL do python não
 * * * 
 * Depois da dependencia do redis ter sido, instalada, o writer está rodando, o que foi checado utilizando do comando "docker ps", no entanto o reader, não está executando, ao checar os logs do reader, é apresentado um erro "go.mod not found", para resolver este problema vou adicionar "go mod init", no Dockerfile do reader
 * * * 
+* Ao executar o reader, uma vez que o modulo foi iniciado, este apresenta um erro de duas dependencias, redis e cors,  a mensagem de erro diz como instala-las, 
+vou adicionar estes "go get ..." no Dockerfile do reader
+* * * 
