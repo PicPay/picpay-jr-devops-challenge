@@ -14,3 +14,5 @@ ao observar o Dockerfile  do writer, o comando python abre o REPL do python não
 * Ao executar o reader, uma vez que o modulo foi iniciado, este apresenta um erro de duas dependencias, redis e cors,  a mensagem de erro diz como instala-las, 
 vou adicionar estes "go get ..." no Dockerfile do reader
 * * * 
+* Depois de instalar cors e redis no reader, é apresentado um erro de código informando que foram passados dois argumentos onde somente um era necessário, é mostrado que isso ocorre na linha 27, no método client.cmdable.Get, onde são passados um context.Context como primeiro argumento e uma string como segundo argumento e que só é necessário o argumento string, vou remover o primeiro argumento do código.
+* * * 
