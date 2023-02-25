@@ -9,3 +9,5 @@ ao observar o Dockerfile  do writer, o comando python abre o REPL do python não
 * * *
 * Após a mudança no ENTRYPOINT do writer o mesmo ainda apresenta erro na criação do container, neste caso um erro de dependencia, não foi instalado o modulo redis, para resolver isso vou adicionar pip install redis, no Dockerfile do writer.
 * * * 
+* Depois da dependencia do redis ter sido, instalada, o writer está rodando, o que foi checado utilizando do comando "docker ps", no entanto o reader, não está executando, ao checar os logs do reader, é apresentado um erro "go.mod not found", para resolver este problema vou adicionar "go mod init", no Dockerfile do reader
+* * * 
