@@ -10,14 +10,14 @@ services:
   reader:
     build: services/reader
     ports:
-      - "8081:8081"
+      - "8080:8080"
     networks:
       - frontend
       - database
   writer:
     build: services/writer
     ports:
-      - "8080:8080"
+      - "8081:8081"
     networks:
       - backend
       - database
