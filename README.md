@@ -16,3 +16,5 @@ vou adicionar estes "go get ..." no Dockerfile do reader
 * * * 
 * Depois de instalar cors e redis no reader, é apresentado um erro de código informando que foram passados dois argumentos onde somente um era necessário, é mostrado que isso ocorre na linha 27, no método client.cmdable.Get, onde são passados um context.Context como primeiro argumento e uma string como segundo argumento e que só é necessário o argumento string, vou remover o primeiro argumento do código.
 * * * 
+* Agora que o código do reader foi alterado, todos os serviços estão executando, vou obter os logs de cada um e analisar. Nem o writer nem o reader possuem logs, os logs do redis dizem que ele está pronto para receber conexões e o do serviço web diz, que ele está executando na porta 3000, acredito que no docker-compose não tinha a porta 3000 ... . Não no docker-compose o serviço web é declarado na porta 5000, como está o Dockerfile ? Tem um Expose 5000 ... Neste caso, vou alterar o EXPOSE para o valor correto no Dockerfile e o serviço web para ser na porta 3000:3000, para seguir o padrão da mesma porta no host e no container. 
+* * *
