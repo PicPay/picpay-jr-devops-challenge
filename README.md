@@ -7,3 +7,5 @@
 * Ao executar docker-compose up, o serviço de writer apresenta um erro, pelo docker logs, não é mostrada nenhuma informação pois o container não está em execução, mas 
 ao observar o Dockerfile  do writer, o comando python abre o REPL do python não esperando por nenhum argumento, para que main.py seja executado é necessário ou usar CMD com python main.py ou ENTRYPOINT com python main.py, vou utilizar com ENTRYPOINT 
 * * *
+* Após a mudança no ENTRYPOINT do writer o mesmo ainda apresenta erro na criação do container, neste caso um erro de dependencia, não foi instalado o modulo redis, para resolver isso vou adicionar pip install redis, no Dockerfile do writer.
+* * * 
